@@ -38,6 +38,19 @@ MYSQL_BACKUP_FOLDER=folder_name    --this will create backups inside storage/fol
 
 
 
-## app/Console/Commands/MysqlDump.php
-this file designed in a way that in future we can add multiple commands for our backup whether database is percona,rds or maria db with commands like innoddbbackup
+## More about Laravel command file app/Console/Commands/MysqlDump.php
+this command file is coded in a way that in future we can add multiple sql backup commands whether database is percona,rds or maria db with commands like innobackupex
+innobackupex --defaults-file=/etc/mysql/backup-my.cnf \
+    --no-timestamp \
+    --use-memory=1G \
+    --stream=xbstream \
+    --parallel=4 \
+    --encrypt=AES256 \
+    --encrypt-key-file=/etc/mysql/backup_key \
+    --encrypt-threads=4 \
+    --compress \
+    --compress-threads=4 \
+    --history=$(date +%d-%m-%Y) ./ > \
+    mysqlbackup$(date +%d-%m-%Y).qp.xbc.xbs 2> \
+    backup-progress.log &
 
