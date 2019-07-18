@@ -13,24 +13,27 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 ## About Code
 
-I have created command for mysql backups which is app/Console/Commands/MysqlDump.php. Here I have defined all confiugrations variables those can be provided through our .env files i.e. 
-
+I have created Laravel command file for mysql backups which is inside the directory app/Console/Commands/MysqlDump.php. 
+ 
+These are the .env config variables you need to set to make this script run 
 DB_CONNECTION=mysql \
 DB_HOST=127.0.0.1 \
-DB_PORT=8889 \
-DB_DATABASE=safename \
-DB_USERNAME=root \
-DB_PASSWORD=root \
-MYSQL_DUMP_PATH=/Applications/MAMP/Library/bin/mysqldump \
+DB_PORT=3306 \
+DB_DATABASE=putdbnamehere \
+DB_USERNAME=putusernamehere \
+DB_PASSWORD=putpasswordhere \
+MYSQL_DUMP_PATH=mysqldump \
 GZIP=true \
-MYSQL_DB_BACKUP=current
+MYSQL_DB_BACKUP=current -- we can provide either current(for current db backup) or ALL to backup all dbs 
 
-## Importan config vars 
-MYSQL_DUMP_PATH=/Applications/MAMP/Library/bin/mysqldump -- this should be the path to mysqldump \
-GZIP=true   --- if you want gzip compression \
-MYSQL_DB_BACKUP=current   -- to make db of current database only  right now in our env its set to current pls change accordingly \
+## further explaination of above config vars 
+MYSQL_DUMP_PATH=/mysqldump -- this should be the path to mysqldump command default is mysqldump \
+GZIP=true   --- if you want gzip compression for final dump file \
+MYSQL_DB_BACKUP=current   -- to make backup of current database only user current or ALL for full backup with all databases for example 4 as per your task. \
 MYSQL_DB_BACKUP=ALL    -- to make a backup of all dbs \
-MYSQL_BACKUP_FOLDER=    --this is to specify folder of your wish inside storage directory default is mysqlbackups folder
+
+Backups are stored inside storage directory in mysqlbackups folder if you want to change directory name you can pass in below .env variable
+MYSQL_BACKUP_FOLDER=folder_name    --this will create backups inside storage/folder_name/date_sql.gz
 
 
 
